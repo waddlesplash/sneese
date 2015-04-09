@@ -223,13 +223,13 @@ namespace JMA
     vector<jma_public_file_info> file_info_vector;
     jma_public_file_info file_info;
 
-    for (vector<jma_file_info>::iterator i = files.begin(); i != files.end(); i++)
+    for (jma_file_info i : files)
     {
-      file_info.name = i->name;
-      file_info.comment = i->comment;
-      file_info.size = i->size;
-      file_info.datetime = uint_to_time(i->date, i->time);
-      file_info.crc32 = i->crc32;
+      file_info.name = i.name;
+      file_info.comment = i.comment;
+      file_info.size = i.size;
+      file_info.datetime = uint_to_time(i.date, i.time);
+      file_info.crc32 = i.crc32;
       file_info_vector.push_back(file_info);
     }
 
@@ -392,11 +392,11 @@ namespace JMA
     size_t size = 0;
 
     //For each file, add it's pointer to the vector, size is pointer offset in the buffer
-    for (vector<jma_file_info>::iterator i = files.begin(); i != files.end(); i++)
+    for (jma_file_info i : files)
     {
-      i->buffer = decompressed_buffer+size;
+      i.buffer = decompressed_buffer+size;
       file_pointers.push_back(decompressed_buffer+size);
-      size += i->size;
+      size += i.size;
     }
 
     //Return the vector of pointers
@@ -415,17 +415,17 @@ namespace JMA
     size_t our_file_size = 0;
 
     //Search through the vector of file information
-    for (vector<jma_file_info>::iterator i = files.begin(); i != files.end(); i++)
+    for (jma_file_info i : files)
     {
-      if (i->name == name)
+      if (i.name == name)
       {
         //Set the variable so we can tell we found it
-        our_file_size = i->size;
+        our_file_size = i.size;
         break;
       }
 
       //Keep a running total of size
-      size_to_skip += i->size;
+      size_to_skip += i.size;
     }
 
     if (!our_file_size) //File with the specified name was not found in the archive

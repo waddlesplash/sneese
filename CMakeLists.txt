@@ -1,7 +1,7 @@
 ############
 ### Project Setup
 ############
-cmake_minimum_required(VERSION 2.8.4 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.1 FATAL_ERROR)
 project(SNEeSe)
 set(CMAKE_C_SIZEOF_DATA_PTR 4) # TODO: remove me once we can compile in 64bit mode
 enable_language(ASM_NASM)
@@ -47,3 +47,4 @@ add_executable(sneese ${SRCS} ${ASM_SRCS})
 target_link_libraries(sneese z ${ALLEGRO_LIBS})
 	# TODO: once we can compile in 64bit mode, use find_package for zlib
 set_target_properties(sneese PROPERTIES LINK_FLAGS "-m32")
+target_compile_features(sneese PRIVATE cxx_range_for)

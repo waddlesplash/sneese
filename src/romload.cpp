@@ -1164,13 +1164,13 @@ static bool open_rom_jma(const char *filename)
     string our_file_name;
     size_t our_file_size = 0;
 
-    for (vector<JMA::jma_public_file_info>::iterator i = file_info.begin(); i != file_info.end(); i++)
+    for (JMA::jma_public_file_info i : file_info)
     {
       //Check for valid ROM based on size
-      if ((i->size <= ROM_SIZE_MAX + ROM_Header_Size) && (i->size > our_file_size))
+      if ((i.size <= ROM_SIZE_MAX + ROM_Header_Size) && (i.size > our_file_size))
       {
-        our_file_name = i->name;
-        our_file_size = i->size;
+        our_file_name = i.name;
+        our_file_size = i.size;
       }
     }
 
