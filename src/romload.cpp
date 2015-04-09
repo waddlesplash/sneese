@@ -68,7 +68,6 @@ You must read and accept the license prior to use.
 
 #include <iostream>
 #include "jma/jma.h"
-using namespace std;
 
 
 
@@ -1153,6 +1152,9 @@ bool PatchROMAddress(const unsigned address, const unsigned char byte)
 
 static bool open_rom_jma(const char *filename)
 {
+  using std::string;
+  using std::vector;
+
   unsigned char *buffer = 0;
   try
   {

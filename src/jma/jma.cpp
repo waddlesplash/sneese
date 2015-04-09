@@ -19,11 +19,17 @@ Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
 #include <sstream>
 #include "jma.h"
-using namespace std;
 
 #include "portable.h"
 #include "7z.h"
 #include "crc32.h"
+
+using std::string;
+using std::stringstream;
+using std::istream;
+using std::ios;
+using std::vector;
+using std::bad_alloc;
 
 namespace JMA
 {

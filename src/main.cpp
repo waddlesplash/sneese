@@ -39,7 +39,6 @@ You must read and accept the license prior to use.
 
 
 #include <iostream>
-using namespace std;
 
 extern const int screenmode_fallback = 2;  /* 640x480x16b */
 
@@ -77,6 +76,8 @@ SCREEN screenmodes[]={
 
 int main(int argc, char **argv)
 {
+ using std::cout;
+ using std::endl;
 
  cout << "SNEeSe, version " << SNEESE_VERSION_STR
       << " (" << RELEASE_DATE << ")" << endl
