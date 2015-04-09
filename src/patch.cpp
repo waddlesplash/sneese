@@ -92,7 +92,7 @@ static bool initPatch()
   if (!IPSPatch.data) { return(false); }
 
   IPSPatch.proccessed = 0;
-  
+
   IPSPatch.zipfile = 0;
 
   IPSPatch.fp = 0;
@@ -275,7 +275,7 @@ void findZipIPS(const char *compressedfile)
     IPSPatch.proccessed = 0;
     reloadBuffer();
     printf("Patching ROM with IPS that was in the ZIP file.\n");
-    PatchUsingIPS();    
+    PatchUsingIPS();
   }
   else
   {

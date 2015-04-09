@@ -161,7 +161,7 @@ int intersect_bands_with_xor(int count1, const unsigned char (*edges1)[2],
   point_set[points + 1] = edges2[i][1] ? edges2[i][1] : 256;
  }
 
- 
+
  /* sort points */
  qsort(point_set, points, sizeof(short), qsort_short);
 
@@ -278,7 +278,7 @@ int intersect_bands_with_or(int count1, const unsigned char (*edges1)[2],
     /* edge of display */
     if (!accumulated[1]) continue;
     /* left edge of new band within accumulated band? */
-    if (edges2[0][0] <= accumulated[1]) 
+    if (edges2[0][0] <= accumulated[1])
     {
      /* extend right edge to absorb new band, if applicable */
      if (((edges2[0][1] - 1) & 0xFF) > ((accumulated[1] - 1) & 0xFF))
@@ -301,7 +301,7 @@ int intersect_bands_with_or(int count1, const unsigned char (*edges1)[2],
      continue;
     }
     /* left edge of new band within accumulated band? */
-    if (edges1[1][0] <= accumulated[1]) 
+    if (edges1[1][0] <= accumulated[1])
     {
      /* extend right edge to absorb new band, if applicable */
      if (((edges1[1][1] - 1) & 0xFF) > ((accumulated[1] - 1) & 0xFF))
@@ -481,7 +481,7 @@ void Recalc_Window_Area_Layer(LAYER_WIN_DATA *bgwin, int extra,
  }
 
  /* intersect */
- 
+
  /*
   Method of generation depends on logic mode.
    OR logic uses AND on the bands outside the window area to compute

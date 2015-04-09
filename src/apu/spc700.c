@@ -483,7 +483,7 @@ static unsigned char SPC_READ_COUNTER(unsigned short address)
 {
   /* 0xFD = read address for first timer's counter */
   int timer = address - 0xFD;
-  unsigned char counter; 
+  unsigned char counter;
 
   Update_SPC_Timer(timer);
   counter = _timers[timer].counter;
@@ -1700,7 +1700,7 @@ static void Execute_SPC(void)
   In_CPU = 0;
 
   load_cycles_spc();
-  
+
   while (_WorkCycles < 0)
   {
     int opcode_done = 1;

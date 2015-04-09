@@ -121,7 +121,7 @@ void update_bg_handlers(unsigned char BGMODE)
  {
   int depth;
   extern unsigned *Depth_NBA_Table[4];
-  
+
   depth = bgmode_bg_type_table[BGMODE & 7][i];
 
   /* set flag on large BG tiles */
@@ -379,9 +379,9 @@ extern void clear_scanlines(unsigned lines);
 #define DISABLE_HV_OFFSET_CHANGE 0
 
 #include "ppu/bgo.h"
- 
+
 #include "ppu/bgom.h"
- 
+
 #include "ppu/mode7.h"
 
 extern unsigned Current_Line_Render;
@@ -1062,7 +1062,7 @@ static void _SCREEN_MODE_2_6(
 )
 {
  clear_scanlines(lines);
- 
+
  _Render_SM26(main_buf, sub_buf, output_surface_offset,
   current_line, lines, layers1, layers2);
 }

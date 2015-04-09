@@ -226,7 +226,7 @@ int intersect_bands_with_xor(int count1, unsigned char (*edges1)[2],
   point_set[points + 1] = edges2[i][1] ? edges2[i][1] : 256;
  }
 
- 
+
  /* sort points */
  qsort(point_set, points, sizeof(short), qsort_short);
 
@@ -273,7 +273,7 @@ void SetPalette()
 
     So each 2 addresses contains 1 palette entry.
  */
- 
+
  colorBGR555 color;
  colorRGB565 Hi;
  unsigned char Red,Green,Blue;

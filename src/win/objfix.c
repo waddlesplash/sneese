@@ -74,7 +74,7 @@ int main(int argc, char **argv)
   for (c = 0; c < section_count; c++)
   {
    fread(section_header, 1, 40, in);
- 
+
    if (!strncmp((const char *) section_header, ".bss", 8))
    {
     memcpy(section_header + 8, section_header + 16, 4);
@@ -106,7 +106,7 @@ int main(int argc, char **argv)
   for (c = 0; c < section_count; c++)
   {
    fread(section_header, 1, 40, in);
- 
+
    fseek(in, -40, SEEK_CUR);
 
    if (!strncmp((const char *) section_header, ".bss", 8))
