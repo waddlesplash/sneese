@@ -3,11 +3,7 @@
 *.DMP
 
 # Ignore compiled object files
-obj/
-
-# Ignore executables
-*.exe
-sneese
+*build*/
 
 # Ignore configuration files
 sneese.cfg
@@ -16,4 +12,3 @@ sneesew.cfg
 # Ignore Eclipse files
 .project
 .cproject
-
