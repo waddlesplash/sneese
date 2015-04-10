@@ -19,7 +19,6 @@ else()
 endif()
 
 add_definitions(-DDEBUG) # TODO: fix so it can be compiled with -DRELEASE_BUILD
-add_definitions(-DZLIB)
 
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -m32 -Wall -Wno-unused-but-set-variable")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -m32 -Wall -Wno-unused-but-set-variable")
@@ -54,7 +53,6 @@ set(ASM_SRCS
 	)
 
 add_executable(sneese ${HEADERS} ${SRCS} ${ASM_SRCS})
-target_link_libraries(sneese z ${ALLEGRO_LIBS})
-	# TODO: once we can compile in 64bit mode, use find_package for zlib
+target_link_libraries(sneese ${ALLEGRO_LIBS})
 set_target_properties(sneese PROPERTIES LINK_FLAGS "-m32")
 target_compile_features(sneese PRIVATE cxx_range_for)

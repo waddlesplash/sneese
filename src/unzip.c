@@ -8,14 +8,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "zlib.h"
+#include <stddef.h>
 #include "unzip.h"
 
-#ifdef STDC
-#  include <stddef.h>
-#  include <string.h>
-#  include <stdlib.h>
-#endif
 #ifdef NO_ERRNO_H
     extern int errno;
 #else
@@ -1128,7 +1123,7 @@ extern int ZEXPORT unzReadCurrentFile  (file, buf, len)
 /*
   Give the current position in uncompressed data
 */
-extern z_off_t ZEXPORT unztell (file)
+extern off_t ZEXPORT unztell (file)
     unzFile file;
 {
     unz_s* s;
@@ -1141,7 +1136,7 @@ extern z_off_t ZEXPORT unztell (file)
     if (pfile_in_zip_read_info==NULL)
         return UNZ_PARAMERROR;
 
-    return (z_off_t)pfile_in_zip_read_info->stream.total_out;
+    return (off_t)pfile_in_zip_read_info->stream.total_out;
 }
 
 
