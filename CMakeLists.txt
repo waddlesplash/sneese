@@ -6,10 +6,16 @@ project(SNEeSe)
 set(CMAKE_C_SIZEOF_DATA_PTR 4) # TODO: remove me once we can compile in 64bit mode
 enable_language(ASM_NASM)
 
-exec_program("allegro-config" ARGS "--libs" OUTPUT_VARIABLE ALLEGRO_LIBS
-	RETURN_VALUE ALLEGRO_STATUS)
-if(NOT ${ALLEGRO_STATUS} EQUAL 0)
-	message(FATAL_ERROR "allegro-config was not found or failed to run.")
+if(ALLEGRO_INSTALL_PREFIX)
+	link_directories(${ALLEGRO_INSTALL_PREFIX}/lib)
+	include_directories(${ALLEGRO_INSTALL_PREFIX}/include)
+	set(ALLEGRO_LIBS alleg)
+else()
+	exec_program("allegro-config" ARGS "--libs" OUTPUT_VARIABLE ALLEGRO_LIBS
+		RETURN_VALUE ALLEGRO_STATUS)
+	if(NOT ${ALLEGRO_STATUS} EQUAL 0)
+		message(FATAL_ERROR "ALLEGRO_INSTALL_PREFIX unset, and allegro-config was not found or failed to run.")
+	endif()
 endif()
 
 add_definitions(-DDEBUG) # TODO: fix so it can be compiled with -DRELEASE_BUILD
@@ -19,9 +25,12 @@ set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -m32 -Wall -Wno-unused-but-set-variable")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -m32 -Wall -Wno-unused-but-set-variable")
 set(CMAKE_ASM_NASM_FLAGS "-w+orphan-labels -w+macro-params -O20 -i${CMAKE_CURRENT_SOURCE_DIR}/include/")
 
-include_directories(include)
+include_directories(include src)
 if(UNIX)
 	add_definitions(-DUNIX)
+elseif(WIN32)
+	add_definitions(-DWIN32)
+	set(CMAKE_ASM_NASM_FLAGS "${CMAKE_ASM_NASM_FLAGS} --prefix _")
 endif()
 
 file(GLOB_RECURSE HEADERS "include/*")
