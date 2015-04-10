@@ -24,6 +24,7 @@ if(UNIX)
 	add_definitions(-DUNIX)
 endif()
 
+file(GLOB_RECURSE HEADERS "include/*")
 aux_source_directory(src SRCS)
 aux_source_directory(src/allegro SRCS)
 aux_source_directory(src/apu SRCS)
@@ -43,7 +44,7 @@ set(ASM_SRCS
 	src/ppu/ppu.asm
 	)
 
-add_executable(sneese ${SRCS} ${ASM_SRCS})
+add_executable(sneese ${HEADERS} ${SRCS} ${ASM_SRCS})
 target_link_libraries(sneese z ${ALLEGRO_LIBS})
 	# TODO: once we can compile in 64bit mode, use find_package for zlib
 set_target_properties(sneese PROPERTIES LINK_FLAGS "-m32")
