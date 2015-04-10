@@ -42,7 +42,7 @@ Portions copyright (c) 2002 Andrea Mazzoleni. ( http://advancemame.sf.net )
 
 
 New development
-Core & DOS/Win32 Port Developer/Maintainer
+Core & Win32 Port Developer/Maintainer
  Charles Bilyue     (TRAC)      esaelon* *at* *users.sf.net
 Unix/Linux/BeOS Port Developer/Maintainer
  Daniel Horchner                dbjh* *at* *gmx.net
@@ -118,24 +118,6 @@ Here is a rough guide to the things you need to run this emulator:
 
  - Some SNES ROM images to try out. I will NOT give images due to ethics
     and copyright laws. Don't waste our time asking.
-
--- DOS --
- - A PC running MS-DOS or Win9x (95/98/ME).
-
- - SVGA graphics card (either with native VESA 2 support, or with a driver
-    providing VESA 2 support, such as UniVBE or Scitech Display Doctor)
-    for the following display modes:
-     16-bit using linear framebuffer
-      320x200        - 320x240
-      640x480
-
- - A sound card from the following list for sound output (compatible cards
-    may work):
-    Ensoniq Soundscape;
-    ESS AudioDrive;
-    Sound Blaster (SB1.0, SB1.5, SB2.0, SB Pro, SB Pro 2.0, SB16);
-    Windows Sound System.
-
 
 -- Win32 --
  - A PC running 32-bit Windows (Win9X/ME/NT/2K/XP, etc.), with
@@ -238,7 +220,7 @@ In the file loading window:
  HOME will go to the top of the list;
  and END to the bottom of the files (first press),
  then to the bottom of the directories (second press),
- then (DOS/Win32 only) to the bottom of the drives (third press).
+ then (Win32 only) to the bottom of the drives (third press).
 
 There is no exclusion by extension, and no jump-to-pressed-letter in
 the file loader yet, and LFNs are truncated... sorry, but will fix
@@ -371,9 +353,6 @@ Audio output:
 Video output:
  -m#  Set screen mode
   Available screen modes:
- DOS:
-   0:320x200x16b VESA2     1:320x240x16b VESA2     2:640x480x16b VESA2
- Win32, Unix & BeOS:
    0:320x200x16b           1:320x240x16b           2:640x480x16b
    3:800x600x16b           4:960x720x16b           5:1024x768x16b
    6:256x239x16b           7:512x478x16b           8:768x717x16b

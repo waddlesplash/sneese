@@ -43,14 +43,7 @@ You must read and accept the license prior to use.
 extern const int screenmode_fallback = 2;  /* 640x480x16b */
 
 SCREEN screenmodes[]={
-#if defined(ALLEGRO_DOS)
- {16,320,200,320,200,GFX_VESA2L,},  // 320x200x16b VESA2L
- {16,320,240,320,240,GFX_VESA2L,},  // 320x240x16b VESA2L
- {16,640,480,640,480,GFX_VESA2L,},  // 640x480x16b VESA2L
- {16,800,600,800,600,GFX_VESA2L,},  // 800x600x16b VESA2L
- {16,960,720,960,720,GFX_VESA2L,},  // 960x720x16b VESA2L
- {16,1024,768,1024,768,GFX_VESA2L,} // 1024x768x16b VESA2L
-#elif defined(ALLEGRO_WINDOWS) || defined(ALLEGRO_UNIX) || defined(ALLEGRO_BEOS)
+#if defined(ALLEGRO_WINDOWS) || defined(ALLEGRO_UNIX) || defined(ALLEGRO_BEOS)
  {16,320,200,320,200,               // 320x200x16b
   GFX_AUTODETECT_FULLSCREEN, GFX_AUTODETECT_WINDOWED },
  {16,320,240,320,240,               // 320x240x16b
@@ -109,7 +102,7 @@ int main(int argc, char **argv)
    return 1;
   }
 
-#if defined(ALLEGRO_DOS) || defined(ALLEGRO_UNIX) || defined(ALLEGRO_BEOS)
+#if defined(ALLEGRO_UNIX) || defined(ALLEGRO_BEOS)
   cout << endl << "Press any key to continue...";
   cout.flush();
 

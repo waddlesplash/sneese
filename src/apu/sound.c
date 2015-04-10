@@ -1895,15 +1895,3 @@ void sound_resume(void)
 {
  if (sound_enabled) platform_resume_audio_voice(&audio_voice);
 }
-
-#ifdef ALLEGRO_DOS
-BEGIN_DIGI_DRIVER_LIST
- DIGI_DRIVER_SOUNDSCAPE
- DIGI_DRIVER_AUDIODRIVE
- DIGI_DRIVER_WINSOUNDSYS
- DIGI_DRIVER_SB
-END_DIGI_DRIVER_LIST
-
-BEGIN_MIDI_DRIVER_LIST
-END_MIDI_DRIVER_LIST
-#endif

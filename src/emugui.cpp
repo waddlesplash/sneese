@@ -255,11 +255,6 @@ const char *Sound_Options[SOUND_NUM_OPTIONS]={
 WINDOW *Controls_window=0;
 
 enum {
-#if 0
-#ifdef ALLEGRO_DOS
- CONTROLS_JOYSTICK_DRIVER,
-#endif
-#endif
  CONTROLS_CONTROLLER_1,
  CONTROLS_CONTROLLER_2,
  CONTROLS_MAP_1,
@@ -269,11 +264,6 @@ enum {
 
 const char *Controls_Options[CONTROLS_NUM_OPTIONS]=
 {
-#if 0
-#ifdef ALLEGRO_DOS
- "Joystick: **************",    // joystick driver
-#endif
-#endif
  "-------- on player 1",        // controls: first player
  "-------- on player 2",        // controls: second player
  "Define keys for player 1",
@@ -281,23 +271,7 @@ const char *Controls_Options[CONTROLS_NUM_OPTIONS]=
 };
 
 WINDOW *Screen_window=0;
-#if defined(ALLEGRO_DOS)
-enum
-{
- SCREEN_OPTIONS_MODE_OFFSET,
- SCREEN_USE_WINDOW
-};
-#define NUM_SCREEN_OPTIONS 6
-const char *Screen_Options[NUM_SCREEN_OPTIONS]={
- "320x200x16b VESA2",
- "320x240x16b VESA2",
- "640x480x16b VESA2",
- "800x600x16b VESA2",
- "960x720x16b VESA2",
- "1024x768x16b VESA2"
-};
-
-#elif defined(ALLEGRO_WINDOWS) || defined(ALLEGRO_UNIX) || defined(ALLEGRO_BEOS)
+#if defined(ALLEGRO_WINDOWS) || defined(ALLEGRO_UNIX) || defined(ALLEGRO_BEOS)
 
 enum
 {
@@ -473,7 +447,7 @@ const char *FileWindow()
     continue;
 
    case KEY_END:
-#if defined(ALLEGRO_DOS) || defined(ALLEGRO_WINDOWS)
+#if defined(ALLEGRO_WINDOWS)
     if (FileListPos + 15 + 26 < NumListings + 1)
     {
      if (FileListPos + 15 < NumFiles + 1)

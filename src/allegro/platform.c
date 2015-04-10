@@ -32,24 +32,6 @@ You must read and accept the license prior to use.
 
 #define GUI_DEFAULT 1
 
-#ifdef ALLEGRO_DJGPP
-#include <crt0.h>
-void   __crt0_load_environment_file(char *_app_name){}
-char **__crt0_glob_function(char *_arg){ return 0; }
-
-#ifdef DEBUG
-int _crt0_startup_flags = _CRT0_FLAG_FILL_DEADBEEF;
-#endif
-#endif
-
-#ifdef ALLEGRO_DOS
-BEGIN_COLOR_DEPTH_LIST
- COLOR_DEPTH_8
- COLOR_DEPTH_15
- COLOR_DEPTH_16
-END_COLOR_DEPTH_LIST
-#endif
-
 #include "helper.h"
 #include "input.h"
 #include "romload.h"
@@ -79,21 +61,14 @@ void LoadConfigCurrent(void)
  char keymapbuf[81];
 
  SCREEN_MODE = get_config_int("display", "screenmode", 1);
-#if defined(ALLEGRO_DOS)
- if ((cfg_version >= 0.72 && cfg_version <= 0.842 && SCREEN_MODE > 6) ||
-	 (cfg_version >= 0.843 && SCREEN_MODE > 5)) SCREEN_MODE = 0;
-#elif defined(ALLEGRO_WINDOWS) || defined(ALLEGRO_UNIX) || defined(ALLEGRO_BEOS)
+#if defined(ALLEGRO_WINDOWS) || defined(ALLEGRO_UNIX) || defined(ALLEGRO_BEOS)
  if ((cfg_version >= 0.72 && cfg_version <= 0.842 && SCREEN_MODE > 7) ||
 	 (cfg_version >= 0.843 && SCREEN_MODE > 8)) SCREEN_MODE = 0;
 #else
 #error Unable to determine platform for limiting screen mode.
 #endif
 
-#ifndef ALLEGRO_DOS
  screen_mode_windowed = get_config_int("display", "use_window", 1);
-#else   /* !defined(ALLEGRO_DOS) */
- screen_mode_windowed = 0;
-#endif  /* !defined(ALLEGRO_DOS) */
 
  display_process = (DISPLAY_PROCESS) get_config_int("display", "process", SDP_NONE);
  if ((unsigned) display_process >= NUM_DISPLAY_PROCESSES)
@@ -211,26 +186,6 @@ void FixupConfig(void)
  /* Compatibility with old screen modes */
  if (cfg_version < 0.843)
  {
-#ifdef ALLEGRO_DOS
-  switch (SCREEN_MODE)
-  {
-  case 0:   /* 0: 320x200x256 VGA    -> 0: 320x200x16b VESA2 */
-  case 4:   /* 4: 320x200x16b VESA2  -> 0: 320x200x16b VESA2 */
-   SCREEN_MODE = 0;
-   break;
-
-  case 1:   /* 1: 320x240x256 VESA2  -> 1: 320x240x16b VESA2 */
-  case 2:   /* 2: 320x240x256 MODE-X -> 1: 320x240x16b VESA2 */
-  case 3:   /* 3: 256x239x256 VGA    -> 1: 320x240x16b VESA2 */
-  case 5:   /* 5: 320x240x16b VESA2  -> 1: 320x240x16b VESA2 */
-   SCREEN_MODE = 1;
-   break;
-
-  case 6:   /* 6: 640x480x16b VESA2  -> 2: 640x480x16b VESA2 */
-   SCREEN_MODE = 2;
-   break;
-  }
-#elif defined(ALLEGRO_WINDOWS) || defined(ALLEGRO_UNIX) || defined(ALLEGRO_BEOS)
   switch (SCREEN_MODE)
   {
   case 0:   /* 0: 320x200x256 WIN    -> 0: 320x200x16b  */
@@ -265,7 +220,6 @@ void FixupConfig(void)
    screen_mode_windowed = 0;
    break;
   }
-#endif
  }
  else if (cfg_version < 0.72)
  {
@@ -348,18 +302,13 @@ void SaveConfig(void)
  fprintf(cfg, "# Display settings\n");
  fprintf(cfg, "[display]\n");
  fprintf(cfg, "# Available screen modes:\n");
-#ifdef ALLEGRO_DOS
- fprintf(cfg, "#  0:320x200x16b VESA2     1:320x240x16b VESA2     2:640x480x16b VESA2\n");
- fprintf(cfg, "#  3:800x600x16b VESA2     4:960x720x16b VESA2     5:1024x768x16b VESA2\n");
-#elif defined(ALLEGRO_WINDOWS) || defined(ALLEGRO_UNIX) || defined(ALLEGRO_BEOS)
+#if defined(ALLEGRO_WINDOWS) || defined(ALLEGRO_UNIX) || defined(ALLEGRO_BEOS)
  fprintf(cfg, "#  0:320x200x16b           1:320x240x16b           2:640x480x16b\n");
  fprintf(cfg, "#  3:800x600x16b           4:960x720x16b           5:1024x768x16b\n");
  fprintf(cfg, "#  6:256x239x16b           7:512x478x16b           8:768x717x16b\n");
 #endif
  fprintf(cfg, "screenmode=%d\n", SCREEN_MODE);
-#ifndef ALLEGRO_DOS
  fprintf(cfg, "use_window=%d\n", screen_mode_windowed);
-#endif  /* !defined(ALLEGRO_DOS) */
  fprintf(cfg, "\n");
 
  fprintf(cfg, "# Available screen processing methods:\n");
@@ -560,21 +509,10 @@ int platform_init(int argc, char **argv)
  install_keyboard();
  install_key_release_callback();
 
-#if 0
-#ifdef ALLEGRO_DOS
- if (load_joystick_data(NULL))
- {
-   install_joystick(JOY_TYPE_6BUTTON);
- }
-#else
-#endif
-#endif
  if (load_joystick_data(NULL))
  {
    install_joystick(JOY_TYPE_AUTODETECT);
  }
-#if 0
-#endif
 
 #ifndef NO_GUI
 #if GUI_DEFAULT

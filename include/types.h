@@ -43,24 +43,18 @@ struct SCREEN {
  int depth,w_base,h_base,w,h;
  /* driver for full-screen display */
  int driver;
-#ifndef ALLEGRO_DOS
  /* driver for windowed display */
  int driver_win;
-#endif  /* !defined(ALLEGRO_DOS) */
 
  int set(bool windowed = false)
  {
   int error;
   int using_driver;
 
-#ifndef ALLEGRO_DOS
    int depth = desktop_color_depth();
    if (depth == 0 || !windowed) depth = this->depth;
 
    using_driver = windowed ? driver_win : driver;
-#else   /* defined(ALLEGRO_DOS) */
-   using_driver = driver;
-#endif  /* defined(ALLEGRO_DOS) */
 
   set_color_depth(depth);
   error = set_gfx_mode(using_driver, w_base, h_base, w_base, h_base);

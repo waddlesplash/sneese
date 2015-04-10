@@ -105,7 +105,7 @@ int GetDirList(const char *Path, FILELIST *&Files, int Offset, int *real_file_co
  FilesRead = 1;
 
  do {
-#if defined(ALLEGRO_DOS) || defined(ALLEGRO_WINDOWS)
+#if defined(ALLEGRO_WINDOWS)
   if (FilesRead == max_listed_files - 26)
 #else
   if (FilesRead == max_listed_files)

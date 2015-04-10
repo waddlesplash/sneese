@@ -27,13 +27,7 @@ You must read and accept the license prior to use.
 #include "allegro/wrapaleg.h"
 
 /* Path separation/length abstraction */
-#if     defined DJGPP
-
-#include <dir.h>
-
-#define FILE_SEPARATOR "\\"
-
-#elif   defined WIN32
+#if   defined WIN32
 
 #include <stdlib.h>
 
